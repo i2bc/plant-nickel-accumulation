@@ -1,0 +1,95 @@
+#import os.path
+#dir = "contigs"
+#GENOMES = []
+#	for f in dir:
+			
+GENOMES = ['Gpru', 'Grac', 'Hbet', 'Hkan', 'Mper', 'Nmon', 'Pcle', 'Pcos', 'Pgab','Pgra', 'Psem', 'Ncfi', 'Phco', 'Phlu',B2_contigs.fa]
+
+AA_MIN = 49 # minimal length of ORFs in translate.pl
+HMM_MAX_EVALUE =  1e-10 # maximal evalue of hmmscan hits for group addition (step one)
+HMM_MIN_COVERAGE = 20 # minimal coverage for group addition (step two)
+
+rule all:
+	input:
+		#COGs construction
+		expand("COGs/hmm/{genome}.hmm", genome=GENOMES),
+		expand("COGs/hmmdom/{genome}.hmm", genome=GENOMES),
+		expand("COGs/hmmdom1e-10/{genome}.hmm", genome=GENOMES),
+		"COGs/new_proteins_in_groups",
+		# a posteriori exclusion of shorter proteines (MINIMAL_LENGTH)
+		expand("COGs/orf"+str(MINIMAL_LENGTH)+"/{genome}.fa", genome=GENOMES),
+		expand("COGs/proteome"+str(MINIMAL_LENGTH)+"/{genome}.fa", genome=GENOMES),
+		expand("COGs/oriented_contigs"+str(MINIMAL_LENGTH)+"/{genome}.fa", genome=GENOMES),
+		expand("COGs/orf_tab"+str(MINIMAL_LENGTH)+"/{genome}.tab", genome=GENOMES)
+			
+# searches for ORFs on the 2 strands of contigs for each genome
+rule search_orf:
+	input:
+		"COGs/contigs/{genome}.fa"	
+	output:
+		"COGs/oriented_contigs/{genome}.fa",
+		"COGs/orf/{genome}.fa",
+		"COGs/orf_tab/{genome}.tab",		
+		"COGs/proteome/{genome}.fa",
+		count=temp("reversed_sequences_{genome}")
+	shell:
+		"perl translate_genome.pl {AA_MIN} {input} > {output.count}"
+
+# resume results	
+rule count_reverse:
+    input:
+        rev=expand("reversed_sequences_{genome}", genome=GENOMES)
+    output:
+        "reversed_sequences"
+    shell:
+        "cat {input.rev} >> {output}" 
+
+# run hmmscan with all proteomes against the model groups database 
+rule hmmscan:
+	input:
+		database="COGs/mariodb/mariodatabase",
+		fasta="COGs/proteome/{genome}.fa"
+	output:
+		hmm="COGs/hmm/{genome}.hmm",
+		dom="COGs/hmmdom/{genome}.hmm" 
+	shell:
+		"hmmscan --cpu 25 --tblout {output.hmm} --domtblout {output.dom} {input.database} {input.fasta}"
+
+# filter hmmscan results for evalue < HMM_MAX_EVALUE
+rule evalue_cutoff:
+	input:
+		"COGs/hmmdom/{genome}.hmm"
+	output:		
+		"COGs/hmmdom1e-10/{genome}.hmm"		
+	run:
+		import sys
+		sys.path.append("py_mods")
+		import filter_hmmscan
+		for f in input:
+			filter_hmmscan.filter_dom_by_evalue(HMM_MAX_EVALUE, f, output[0])
+
+# filter former results for protein coverage > HMM_MIN_COVERAGE
+rule : 
+	input:
+		expand("COGs/hmmdom1e-10/{genome}.hmm", genome=GENOMES)
+	output:		
+		"COGs/new_proteins_in_groups"		
+	run:
+		import sys
+		sys.path.append("py_mods")
+		import filter_hmmscan
+		for f in input:
+			filter_hmmscan.add2group(HMM_MIN_COVERAGE, f, output[0])
+			
+
+
+
+		
+
+			
+				
+		
+		
+		
+		
+		
