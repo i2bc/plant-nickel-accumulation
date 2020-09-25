@@ -47,16 +47,16 @@
 *.kilepr
 *.fls
 # data files
-*.doc
-*.docx
-*.odt
-*.csv
-*.xls
-*.xlsx
-*.ods
-*.odg
-*.nex
-*.tre
+#*.doc
+#*.docx
+#*.odt
+#*.csv
+#*.xls
+#*.xlsx
+#*.ods
+#*.odg
+#*.nex
+#*.tre
 # Specific Files
 .Rproj.user
 .local.vimrc

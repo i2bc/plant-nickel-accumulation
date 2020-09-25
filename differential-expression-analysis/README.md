@@ -12,7 +12,6 @@
 
 ## Products of the analysis
 
-* raw_data/sum_counts                 : product of script step 1, count table for pairs of species* raw_data/length                     : product of script step 1, length table for pairs of species
 * data                                : product of scripts step 1 and 2.
 * 2020-09-25_results_nickel_Hyperaccu : product of step 3.
 * figures                             : product of script step 4.
