@@ -1,0 +1,51 @@
+ID-echantillon	Nom.espece	ID.espece	Famille	Sol	Tolerance	Hyperaccu	Localisation	Climat	Culture	Population accronyme 	Pop accronyme
+Gpru_ech1	Geissois pruinosa	Gpru	Cunoniaceae	Serpentinique	oui	oui	Nouvelle Caledonie	Sec	env	NA	NA
+Gpru_ech2	Geissois pruinosa	Gpru	Cunoniaceae	Serpentinique	oui	oui	Nouvelle Caledonie	Sec	env	NA	NA
+Gpru_ech3	Geissois pruinosa	Gpru	Cunoniaceae	Serpentinique	oui	oui	Nouvelle Caledonie	Sec	env	NA	NA
+Grac_ech1	Geissois racemosa	Grac	Cunoniaceae	Non serpentinique	non	non	Nouvelle Caledonie	Mixte	env	NA	NA
+Grac_ech2	Geissois racemosa	Grac	Cunoniaceae	Non serpentinique	non	non	Nouvelle Caledonie	Mixte	env	NA	NA
+Grac_ech3	Geissois racemosa	Grac	Cunoniaceae	Non serpentinique	non	non	Nouvelle Caledonie	Mixte	env	NA	NA
+Hbet_ech1	Homalium betulifoium	Hbet	Salicaceae	Serpentinique	oui	non	Nouvelle Caledonie	Rivulaire	env	NA	NA
+Hbet_ech2	Homalium betulifoium	Hbet	Salicaceae	Serpentinique	oui	non	Nouvelle Caledonie	Rivulaire	env	NA	NA
+Hbet_ech3	Homalium betulifoium	Hbet	Salicaceae	Serpentinique	oui	non	Nouvelle Caledonie	Rivulaire	env	NA	NA
+Hkan_ech1	Homalium kanaliense	Hkan	Salicaceae	Serpentinique	oui	oui	Nouvelle Caledonie	Rivulaire	env	NA	NA
+Hkan_ech2	Homalium kanaliense	Hkan	Salicaceae	Serpentinique	oui	oui	Nouvelle Caledonie	Rivulaire	env	NA	NA
+Hkan_ech3	Homalium kanaliense	Hkan	Salicaceae	Serpentinique	oui	oui	Nouvelle Caledonie	Rivulaire	env	NA	NA
+Lhav_ech1	Leucocroton havanensis	Lhav	Euphorbiaceae	Serpentinique	oui	oui	Cuba	Sec	env	NA	NA
+Lmic_ech1	Lasiocroton microphyllus	Lmic	Euphorbiaceae	Non serpentinique	non	non	Cuba	Foret	env	NA	NA
+Mper_ech1	Microthlaspi perfoliatum	Mper	Brassicaceae	Non serpentinique	non	non	France	Prairie	hydroponic + ni	NA	NA
+Mper_ech2	Microthlaspi perfoliatum	Mper	Brassicaceae	Non serpentinique	non	non	France	Prairie	hydroponic + ni	NA	NA
+Mper_ech3	Microthlaspi perfoliatum	Mper	Brassicaceae	Non serpentinique	non	non	France	Prairie	hydroponic + ni	NA	NA
+Ncfi_ech1	Noccaea caerulescens	Ncfi	Brassicaceae	Serpentinique	oui	oui	France	Prairie	env	NA	NA
+Ncfi_ech2	Noccaea caerulescens	Ncfi	Brassicaceae	Serpentinique	oui	oui	France	Prairie	env	NA	NA
+Nmon_ech1	Noccaea montana	Nmon	Brassicaceae	Serpentinique	oui	non	France	Prairie	env	NA	NA
+Nmon_ech2	Noccaea montana	Nmon	Brassicaceae	Serpentinique	oui	non	France	Prairie	env	NA	NA
+Prev_ech1	Psychotria revoluta	Prev	Rubiaceae	Non serpentinique	non	non	Cuba	Foret	env	NA	NA
+Prev_ech2	Psychotria revoluta	Prev	Rubiaceae	Non serpentinique	non	non	Cuba	Foret	env	NA	NA
+Pcos_ech1	Psychotria costivenia	Pcos	Rubiaceae	Serpentinique	oui	oui	Cuba	Foret	env	NA	NA
+Pcos_ech2	Psychotria costivenia	Pcos	Rubiaceae	Serpentinique	oui	oui	Cuba	Foret	env	NA	NA
+Pgab_ech1	Psychotria gabriellae	Pgab	Rubiaceae	Serpentinique	oui	oui	Nouvelle Caledonie	Foret	env	NA	NA
+Pgab_ech2	Psychotria gabriellae	Pgab	Rubiaceae	Serpentinique	oui	oui	Nouvelle Caledonie	Foret	env	NA	NA
+Pgab_ech3	Psychotria gabriellae	Pgab	Rubiaceae	Serpentinique	oui	oui	Nouvelle Caledonie	Foret	env	NA	NA
+Pgra_ech1	Psychotria grandis	Pgra	Rubiaceae	Serpentinique	oui	oui	Cuba	Foret	env	NA	NA
+Pgra_ech2	Psychotria grandis	Pgra	Rubiaceae	Serpentinique	oui	oui	Cuba	Foret	env	NA	NA
+Phco_ech1	Phyllanthus conjugatus	Phco	Phyllanthaceae	Non serpentinique	non	non	Nouvelle Caledonie	Sec	env	NA	NA
+Phco_ech2	Phyllanthus conjugatus	Phco	Phyllanthaceae	Non serpentinique	non	non	Nouvelle Caledonie	Sec	env	NA	NA
+Phco_ech3	Phyllanthus conjugatus	Phco	Phyllanthaceae	Non serpentinique	non	non	Nouvelle Caledonie	Sec	env	NA	NA
+Phlu_ech1	Phyllanthus lucilliae	Phlu	Phyllanthaceae	Serpentinique	oui	oui	Nouvelle Caledonie	Sec	env	NA	NA
+Phlu_ech2	Phyllanthus lucilliae	Phlu	Phyllanthaceae	Serpentinique	oui	oui	Nouvelle Caledonie	Sec	env	NA	NA
+Phlu_ech3	Phyllanthus lucilliae	Phlu	Phyllanthaceae	Serpentinique	oui	oui	Nouvelle Caledonie	Sec	env	NA	NA
+Psem_ech1	Psychotria semperflorens	Psem	Rubiaceae	Serpentinique	oui	non	Nouvelle Caledonie	Foret	env	NA	NA
+Psem_ech2	Psychotria semperflorens	Psem	Rubiaceae	Serpentinique	oui	non	Nouvelle Caledonie	Foret	env	NA	NA
+Psem_ech3	Psychotria semperflorens	Psem	Rubiaceae	Serpentinique	oui	non	Nouvelle Caledonie	Foret	env	NA	NA
+ScorA_ech2	Senocio coronatus	Scor	Asteraceae	Serpentinique	oui	oui	Afrique du sud	NA	env	AM	Agnes Mine
+ScorA_ech3	Senocio coronatus	Scor	Asteraceae	Serpentinique	oui	oui	Afrique du sud	NA	env	AM	Agnes Mine
+ScorB_ech1	Senocio coronatus	Scor	Asteraceae	Serpentinique	oui	non	Afrique du sud	NA	env	GAL	Galaxy Mine
+ScorB_ech2	Senocio coronatus	Scor	Asteraceae	Serpentinique	oui	non	Afrique du sud	NA	env	GAL	Galaxy Mine
+ScorB_ech3	Senocio coronatus	Scor	Asteraceae	Serpentinique	oui	non	Afrique du sud	NA	env	GAL	Galaxy Mine
+ScorC_ech1	Senocio coronatus	Scor	Asteraceae	Serpentinique	oui	oui	Afrique du sud	NA	env	KP	Kaapsehoop
+ScorC_ech2	Senocio coronatus	Scor	Asteraceae	Serpentinique	oui	oui	Afrique du sud	NA	env	KP	Kaapsehoop
+ScorC_ech3	Senocio coronatus	Scor	Asteraceae	Serpentinique	oui	oui	Afrique du sud	NA	env	KP	Kaapsehoop
+ScorD_ech1	Senocio coronatus	Scor	Asteraceae	Non serpentinique	non	non	Afrique du sud	NA	env	PF	Pullen Farm
+ScorD_ech2	Senocio coronatus	Scor	Asteraceae	Non serpentinique	non	non	Afrique du sud	NA	env	PF	Pullen Farm
+ScorD_ech3	Senocio coronatus	Scor	Asteraceae	Non serpentinique	non	non	Afrique du sud	NA	env	PF	Pullen Farm
