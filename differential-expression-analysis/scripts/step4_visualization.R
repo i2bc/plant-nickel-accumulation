@@ -58,6 +58,37 @@ data_select_trans_norm <- scale(data_select_trans)
 data_select_trans_norm <- as.data.frame(data_select_trans_norm)
 
 ################################################################################
+## Re-Do Analysis to get Coefficients
+################################################################################
+design_formula <- as.formula(" ~  Localisation + condition")
+design_data <- res@sample.annotations[, c('Localisation', 'condition'), drop = FALSE]
+design_data <- data.frame(apply(design_data, 2, as.factor))
+design <- model.matrix(design_formula, design_data)
+model <- "OUfixedRoot"
+
+extract_residuals <- function(dat) {
+  data_reg <- cbind(data.frame(expr = dat), design_data)
+  levels(data_reg$condition) <- c(1, 2)
+  res_phylolm <- phylolm::phylolm(paste("expr", paste(as.character(design_formula), collapse = "")), 
+                                  data = data_reg, phy = tree, model = model, measurement_error = TRUE)
+  preds <- names(res_phylolm$coefficients) != "condition2"
+  resids <- res_phylolm$y - res_phylolm$X[, preds] %*% res_phylolm$coefficients[preds]
+  return(resids)
+}
+
+data_select_trans_resids <- apply(data_select_trans, 2, extract_residuals)
+rownames(data_select_trans_resids) <- rownames(data_select_trans)
+data_select_trans_resids <- as.data.frame(data_select_trans_resids)
+
+data_select_trans_resids_norm <- scale(data_select_trans_resids)
+data_select_trans_resids_norm <- as.data.frame(data_select_trans_resids_norm)
+
+data_select_resids <- 2^data_select_trans_resids
+data_select_resids_norm <- scale(data_select_resids)
+data_select_resids_norm <- as.data.frame(data_select_resids_norm)
+
+
+################################################################################
 ## Plot - PCA
 ################################################################################
 library(DESeq2)
@@ -135,6 +166,7 @@ gt <- gt + theme(text = element_text(size = 7))
 gt <- gt %>% rotate(52) %>% rotate(57) %>% rotate(73)
 # gt
 
+## Scaled
 data_select_long <- data_select_norm %>% rownames_to_column("label") %>%
   pivot_longer(cols = !"label", names_to = "OG") 
 data_select_long$OG <- factor(data_select_long$OG, levels = unique(sort(as.numeric(data_select_long$OG))))
@@ -162,6 +194,57 @@ p2 <- p2 + geom_segment(aes(x = x1, xend = x2, y = y1, yend = y2), data = coord_
 p3 <- p2 %>% insert_left(gt, width = 0.5)
 p3
 ggsave(here::here("figures/selected_OG.pdf"), plot = p3, width = 4.8, height = 4.8)
+
+################################################################################
+## Plot - Full Matrix - Residuals
+################################################################################
+gt <- ggtree(tree) + ylim(c(0, 52))
+# gt <- gt + geom_tiplab(size = 1.9, linesize = .5, offset = 10)
+gt <- gt %<+% conds + geom_tippoint(aes(color = condition), size = 2, position = position_nudge(2))
+gt <- revts(gt + theme_tree2() + labs(caption = "myr ago"))
+gt <- gt + scale_color_viridis_d(name = "Hyperaccu.",
+                                 end = 0.7,
+                                 # values = c("red", "blue"),
+                                 breaks = c("oui", "non"),
+                                 labels = c("Yes", "No"),
+                                 guide = guide_legend(title.position = "top",
+                                                      title.hjust = 0.5,
+                                                      order = 1))
+# gt <- gt + scale_shape_manual(name = "Location",
+#                               breaks = c("Afrique du sud", "Cuba", "France", "Nouvelle Caledonie"),
+#                               labels = c("South Africa", "Cuba", "France", "New Caledonia"),
+#                               values = 15:18)
+gt <- gt + theme(text = element_text(size = 7))
+# gt <- gt + geom_text(aes(label=node))
+gt <- gt %>% rotate(52) %>% rotate(57) %>% rotate(73)
+
+data_select_long <- data_select_trans_resids_norm %>% rownames_to_column("label") %>%
+  pivot_longer(cols = !"label", names_to = "OG") 
+data_select_long$OG <- factor(data_select_long$OG, levels = unique(sort(as.numeric(data_select_long$OG))))
+
+p2 <- ggplot(data_select_long,
+             aes(x = OG, y = label)) +
+  geom_tile(aes(fill = value)) +
+  scale_fill_viridis_c(option = 'magma', direction = -1, name = 'RPKM \n(scaled residuals)',
+                       guide = guide_colorbar(#title.position = "top",
+                         title.hjust = 0,
+                         order = 2)) +
+  scale_x_discrete(position = "top") +
+  # theme_tree2() +
+  theme(text = element_text(size = 6),
+        # legend.position = "bottom",
+        axis.text.x.top = element_text(angle = 90, hjust = 0, vjust = 0.5),
+        axis.line.x.top = element_blank(),
+        # axis.ticks.x.top = element_blank(),
+        axis.title.y = element_blank())
+y_lim_groups <- c(2, 5, 8, 11, 14, 17, 21, 23, 25, 30, 33, 36, 39, 42, 45)
+coord_groups <- data.frame(x1 = 0.5, x2 = 31.5, y1 = y_lim_groups + 0.5, y2 = y_lim_groups + 0.5)
+p2 <- p2 + geom_segment(aes(x = x1, xend = x2, y = y1, yend = y2), data = coord_groups)
+# p2
+
+p3 <- p2 %>% insert_left(gt, width = 0.5)
+p3
+ggsave(here::here("figures/selected_OG_residuals.pdf"), plot = p3, width = 4.8, height = 4.8)
 
 ################################################################################
 ## Plot - selected OGs
