@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="4"
+   name=""
+   committed-date="2007-03-21T09:41:07.754875Z"
+   url="http://129.175.112.69/svn/embgscripts/trunk/lib/Heap/Elem"
+   last-author="lemoine"
+   kind="dir"
+   uuid="3a75b9c7-232c-0410-9be8-c681992ee67d"
+   repos="http://129.175.112.69/svn/embgscripts"
+   revision="8"/>
+<entry
+   committed-rev="4"
+   name="StrRev.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="7fe1011e5c9d57680ef8bd1aa7d6eedc"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:48.000000Z"/>
+<entry
+   committed-rev="4"
+   name="Str.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="d74bf8ffabfbc94660be9fa4c41fffe3"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:48.000000Z"/>
+<entry
+   committed-rev="4"
+   name="RefRev.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="ad5ce3cd15baff7e16399c5a8b4a4ce4"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:48.000000Z"/>
+<entry
+   committed-rev="4"
+   name="NumRev.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="4f3724cd1d7b3be8c2ad94c1734240cf"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:48.000000Z"/>
+<entry
+   committed-rev="4"
+   name="Ref.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="3956bbf94aef4f789816684f462ceced"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:48.000000Z"/>
+<entry
+   committed-rev="4"
+   name="Num.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="2022fc40e6f3313ea10cd448e1869553"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:48.000000Z"/>
+</wc-entries>

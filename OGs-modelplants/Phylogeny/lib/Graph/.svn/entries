@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="4"
+   name=""
+   committed-date="2007-03-21T09:41:07.754875Z"
+   url="http://129.175.112.69/svn/embgscripts/trunk/lib/Graph"
+   last-author="lemoine"
+   kind="dir"
+   uuid="3a75b9c7-232c-0410-9be8-c681992ee67d"
+   repos="http://129.175.112.69/svn/embgscripts"
+   revision="8"/>
+<entry
+   name="AdjacencyMap"
+   kind="dir"/>
+<entry
+   committed-rev="4"
+   name="MSTHeapElem.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="dc06e35229fbf5427eee883708bd40bb"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:47.000000Z"/>
+<entry
+   committed-rev="4"
+   name="Matrix.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="eb5cc6fe0b2f5bba7192ba68bdfdc597"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:47.000000Z"/>
+<entry
+   committed-rev="4"
+   name="AdjacencyMatrix.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="586b68f234543910770027f280e8c2ce"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:47.000000Z"/>
+<entry
+   committed-rev="4"
+   name="SPTHeapElem.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="c750b67f0a10a65844ac5e22b84e5c6b"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:47.000000Z"/>
+<entry
+   name="TransitiveClosure"
+   kind="dir"/>
+<entry
+   committed-rev="4"
+   name="AdjacencyMap.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="8095f19aa4269d6cdf6f91aae11d144b"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:47.000000Z"/>
+<entry
+   committed-rev="4"
+   name="Directed.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="9022d2685b61da16b77dbf8784174d7e"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:48.000000Z"/>
+<entry
+   committed-rev="4"
+   name="TransitiveClosure.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="a28746d8adf808ac19de3ffc2730f711"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:47.000000Z"/>
+<entry
+   committed-rev="4"
+   name="Undirected.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="2d94ad56df03043b374a6abfb4440222"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:47.000000Z"/>
+<entry
+   name="Traversal"
+   kind="dir"/>
+<entry
+   committed-rev="4"
+   name="UnionFind.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="7cf57a3d1c3789a961c31889dc33b4f9"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:47.000000Z"/>
+<entry
+   committed-rev="4"
+   name="Attribute.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="cc3f19e92a5309429230e63b12956e36"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:47.000000Z"/>
+<entry
+   committed-rev="4"
+   name="BitMatrix.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="d2d8af188e0aa907629e39d799cd6005"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:48.000000Z"/>
+<entry
+   committed-rev="4"
+   name="Traversal.pm"
+   text-time="2007-03-21T14:55:48.000000Z"
+   committed-date="2007-03-21T09:41:07.754875Z"
+   checksum="71126717df23da1b8363cf7b7e4e3968"
+   last-author="lemoine"
+   kind="file"
+   prop-time="2007-03-21T14:55:48.000000Z"/>
+</wc-entries>

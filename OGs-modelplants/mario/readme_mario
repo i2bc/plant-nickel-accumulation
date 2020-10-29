@@ -1,0 +1,84 @@
+MaRiO: Meta-approach of prediction of ortholog groups
+Cécile PEREIRA
+Version 1.1; 27 june 2014
+-----------------------------------------
+
+MaRiO is a software implementing a meta-approach of prediction of ortholog groups.
+The meta-approach trick the result of several methods in order to obtain specific 
+intersections, create relevant profile HMMs and add to this intersections 
+sequences coherent with the profile HMMs.
+
+The method is describe in the paper : 
+Cécile Pereira, Alain Denise and Olivier Lespinet, A Meta-approach for improving the 
+prediction and the functional annotation of ortholog groups. (journal) 
+
+------------------------------------------
+
+These are installation instructions.
+Starting from a source distribution, MaRiO-1.1.tar.gz
+ uncompress			tar -xcvf MaRiO-1.1.tar.gz
+ move into new directory:	cd MaRiO-1.1
+
+The main perl script : MaRiO.pl .
+The folder with other scripts are in SCRIPTS .
+The folder with test dataset is DATA .
+Perl library are in the folder MaRiO-1.1/SCRIPTS/perl_library/ .
+It's possibly to install them or to precise the folder containing them with the perl -I option.
+HMMER and Muscle have to be installed.
+
+Testing the program (folder in the ~ directory):
+perl -I ~/SCRIPTS/perl_library/ MaRiO.pl -i ~/MaRiO-1.1/DATA/Groups/ -f ~/MaRiO-1.1/DATA/Proteomes/ -cpu 1  >>MaRiO.out 2>> MaRiO.err
+
+
+---------------------------------------------------------------
+Using MaRiO:
+---------------------------------------------------------------
+
+Fallowing library and programs have to be installed:
+        perl library (use cpan for the installation):   Math::Combinatorics, 
+                                                        Cwd,  
+                                                        Bio::SeqIO,  
+                                                        File::Basename, 
+                                                        File::Spec, 
+                                                        XML::Simple 
+							Parallel::ForkManager
+        programs : muscle, HMMER
+
+Parameters :
+-h      print the help
+-i      folder where are stored homolog groups to combine
+                one file by input method (put at least the result of 2 methods)
+                two files format allowed
+                1) orthoXML format : description at http://orthoxml.org/
+                   file name have to be ended by '.xml'
+                   Noted that if the file contain paires and not groups, groups will be made as 
+                   ensemble of proteins with a relation of orthology with all other proteins in the same group
+                2) "groups" format : one line by group
+                                     protein names separed by a ';'
+-f      folder containing proteomes sequences files both fasta files or seqXML files are allowed, 
+                warning: use one fasta file by specie
+                sequences files in seqXML: file name have to be ended by '.xml'
+                sequences files in fasta format: fine name have to be ended by '.fa'
+-res	result folder, default parameter : RESULTS_metOG_date/
+-tmp	tempory folder, default parameter : TMP_metOG_date/
+-inter  minimum size of the selected intersections for the creation of intermediate groups
+                default parameter : 4
+-e      e-value threshold, default parameter : 1e-10
+-pa     aligment percentage threshold, default parameter : 40 
+-cpu    number of used cpu, default parameter : 1
+
+Examples : 
+perl -I ~/SCRIPTS/perl_library/ MaRiO.pl -i ~/INPUT_GROUPS/ -f ~/FASTA_PROTEOMES/ -cpu 6  >>MaRiO.out 2>> MaRiO.err
+
+Results :
+Results are ortholog groups prediction. This results are saved in the -res folder.
+Two formats are given:
+	fasta format :	 	Groups in fasta format are saved in FINAL_GROUPS.bz2
+				One file by group. 
+				Proteins in the group are listed in fasta format:
+				">protein id \t specie \n sequence"
+	orthoXML format : 	All predicted groups are saved in one file in orthoXML format.
+				See the description of the format at http://orthoxml.org/
+
+The both formats are two way to presenting the same information, take into account the one you prefer.
+

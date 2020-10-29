@@ -1,0 +1,16 @@
+ Fields blast 
+0: query id, 
+1:subject id, 
+2: % identity, 
+3: alignment length, 
+4: mismatches, 
+5: gap opens, 
+6: q. start, 
+7: q. end, 
+8: s. start, 
+9: s. end, 
+10: evalue, 
+11: bit score, 
+12: query length, 
+13: subject length
+
