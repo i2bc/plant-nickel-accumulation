@@ -8,6 +8,8 @@
 # Argument 3: tag du run (etiquette les dossiers successifs)
 # Argument 4 (Ajouter par Sandrine): repertoire contenant les genomes ==> Pour recuperer leur code
 use strict;
+use FindBin;
+use lib "$FindBin::Bin";
 use lib::Elague;
 print "2 phylogeny job \n";
 
