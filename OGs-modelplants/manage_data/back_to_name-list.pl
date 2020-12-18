@@ -1,18 +1,18 @@
 #!/usr/bin/perl -w
 # Coded by C. Drevet
 use File::Basename;
-if ($#ARGV <6) 
+if ($#ARGV <2) 
 { 
-	print "back_to_name-list.pl <inputfile> <valeur de split inputfile> <fichier references numero/genome> <valeur de split reference genomes> <dossier de reference numero/proteines> <valeur de split numero/proteines> <tag>\n";
+	print "back_to_name-list.pl <inputfile>  <fichier references numero/genome> <dossier de reference numero/proteines>\n";
 	exit();
 }
 my $f = $ARGV[0]; #the file to process 
-my $split_f = $ARGV[1];
-my $file_numero_genomes = $ARGV[2];
-my $split_g = $ARGV[3];
-my $dir_numero_prot = $ARGV[4].'/';
-my $split_p = $ARGV[5];
-my $tag = $ARGV[6];
+my $split_f = ';';
+my $file_numero_genomes = $ARGV[1];
+my $split_g = ': ';
+my $dir_numero_prot = $ARGV[2].'/';
+my $split_p = ': ';
+
 # build a table of genome codes
 open (REF, $file_numero_genomes);
 my @genome;
@@ -26,7 +26,7 @@ while($lg = (<REF>))
 close REF;
 #open the file to process 
 
-open(OUT,">named_".basename($f).$tag);        
+open(OUT,">mario_input/".basename($f));        
 open (IN, $f);
 while (<IN>) { $fcontent .= $_; }
 print $fcontent."\n\n\n";

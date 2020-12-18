@@ -80,7 +80,7 @@ output files: STEP5/phylogeny_inparalogs.sql  and STEP5/phylogeny_orthologous_gr
 cd marioplants/OrthoFinder/
 python2 orthofinder.py -b input
 input files: 
-SpeciesIDs.txt
+SpeciesIDs.t
 SequenceIDs.txt
 Symbolic links to fasta and precalculated blasts directories
 output files:
@@ -97,9 +97,10 @@ perl phylogeny2mario.pl <path_to_OGs-modelplants>/
 perl inparanoid2mario.pl <path_to_OGs-modelplants>/
 perl brh2mario.pl <path_to_OGs-modelplants>/
 perl orthofinder2mario.pl <path_to_OGs-modelplants>/
-output files: mario_converted/brh_groups, mario_converted/inparanoid_groups, mario_converted/orthofinder_groups, mario_converted/phylogeny_groups
-perl back_to_name-list.pl ../mario_input/brh_groups ';' ../OrthoFinder/input/SpeciesIDs.txt': ' ../numfiles/ ': ' 
-perl back_to_name-list.pl ../mario_input/inparanoid_mario_groups ';' ../OrthoFinder/input/SpeciesIDs.txt ': ' ../numfiles/ ': '
+output files: mario_converted/brh_groups, mario_converted/inparanoid_groups, mario_input/orthofinder_groups, mario_converted/phylogeny_groups
+perl back_to_name-list.pl ../mario_converted/brh_groups ../OrthoFinder/input/SpeciesIDs.txt ../numfiles/  
+perl back_to_name-list.pl ../mario_converted/inparanoid_groups ../OrthoFinder/input/SpeciesIDs.txt ../numfiles/
+perl back_to_name-list.pl ../mario_converted/phylogeny_groups ../OrthoFinder/input/SpeciesIDs.txt ../numfiles/
 output files: mario_input/brh_groups, mario_input/inparanoid_groups, mario_input/orthofinder_groups, mario_input/phylogeny_groups
 
 # mario
