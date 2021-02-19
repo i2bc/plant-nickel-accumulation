@@ -22,7 +22,7 @@
 
 rm(list=ls())
 library(here)
-# devtools::install_github("pbastide/phylocompcodeR")
+# devtools::install_github("pbastide/phylocompcodeR", ref = "nickel-paper")
 library(phylocompcodeR)
 
 ################################################################################
