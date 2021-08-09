@@ -115,18 +115,25 @@ rld@colData@listData$condition <- mapvalues(rld@colData@listData$condition, from
 ## plot PCA 
 pcaData <- plotPCA(rld, intgroup=c("condition","Famille"), returnData=TRUE)
 percentVar <- round(100 * attr(pcaData, "percentVar"))
-ggplot(pcaData, aes(PC1, PC2, color=condition, shape=Famille)) +
-  geom_point(size=3) +
+ggplot(pcaData, aes(PC1, PC2, color=condition, fill=condition, shape=Famille)) +
+  geom_point(size=3, alpha = 0.8) +
   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
   ylab(paste0("PC2: ",percentVar[2],"% variance")) + 
   scale_color_viridis_d(end = 0.7, name = "Hyperaccu.",
                         breaks = c("hyper", "non-hyper"),
-                        labels = c("Yes", "No"),) +
+                        labels = c("Yes", "No")) +
+  scale_fill_viridis_d(end = 0.7,
+                       breaks = c("hyper", "non-hyper"),
+                       labels = c("Yes", "No"),
+                       guide = "none") + 
   #geom_text(aes(label=c(matrix(unlist(strsplit(rownames(colData),"_")),ncol=2,byrow = T)[,1])),hjust=.5, vjust=-.8, size=3) +
   #geom_density2d(alpha=.5) +
-  scale_shape(name = "Familly", solid = FALSE) +
+  # scale_shape(name = "Familly", solid = TRUE) +
+  scale_shape_manual(name = "Familly", values = c(21:25, 8)) +
+  guides(shape = guide_legend(override.aes = list(fill = "black"))) + 
   theme_bw() +
   coord_fixed()
+# colorblindr::cvd_grid()
 ggsave(here::here("figures/PCA.pdf"), width = 5, height = 4)
 
 
@@ -218,7 +225,7 @@ gt <- gt + theme(text = element_text(size = 7))
 # gt <- gt + geom_text(aes(label=node))
 gt <- gt %>% rotate(52) %>% rotate(57) %>% rotate(73)
 
-data_select_long <- data_select_trans_resids_norm %>% rownames_to_column("label") %>%
+data_select_long <- data_select_resids_norm %>% rownames_to_column("label") %>%
   pivot_longer(cols = !"label", names_to = "OG") 
 data_select_long$OG <- factor(data_select_long$OG, levels = unique(sort(as.numeric(data_select_long$OG))))
 
