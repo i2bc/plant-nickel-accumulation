@@ -2,6 +2,7 @@ rm(list=ls())
 library(here)
 # devtools::install_github("pbastide/phylocompcodeR")
 library(phylocompcodeR)
+library(stringr)
 
 ################################################################################
 ## File management
@@ -318,16 +319,18 @@ data_traits <-  rownames_to_column(data_traits, "label")
 data_traits <- left_join(data_traits, d, by='label')
 data_traits <- left_join(data_traits, conds, by='label')
 data_traits$label <- gsub("_", " ", data_traits$label)
+## replace ech with s in label
+data_traits$label <- str_replace(data_traits$label,"ech","s")
 
-p1 <- ggplot(data_traits, aes(y, OG_411)) +
-  ggtitle("411") +
+p1 <- ggplot(data_traits, aes(y, OG_13722)) +
+  ggtitle("13722") +
   geom_point(aes(color = condition), size = 0.5) +
   coord_flip() + theme_tree2() +
   theme(legend.position = 'none',
         plot.title = element_text(size = 10),
         text = element_text(size = 10)) +
   scale_color_viridis_d(breaks = c("oui", "non"), labels = c("Yes", "No"), end = 0.7, guide = FALSE) +
-  scale_y_continuous(breaks = get_ticks, expand = c(0, 0), limits = c(-10, max(data_traits$OG_411) + 10)) +
+  scale_y_continuous(breaks = get_ticks, expand = c(0, 0), limits = c(-10, max(data_traits$OG_13722) + 10)) +
   labs(caption = "RPKM") +
   ylim2(gt)
 p2 <- ggplot(data_traits, aes(y, OG_4147)) +
@@ -372,3 +375,4 @@ ggsave(here::here("figures/selected_OG_dots_3.pdf"), plot = p5, width = 4.8, hei
 p6 <- plot_grid(gt, p2, p3, pLabel, ncol = 4, align = 'h', rel_widths = c(1, 1.5, 1.5, 0.8))
 p6
 ggsave(here::here("figures/selected_OG_dots_2.pdf"), plot = p6, width = 4.8, height = 4.8)
+
