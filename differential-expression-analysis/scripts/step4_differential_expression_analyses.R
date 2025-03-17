@@ -141,12 +141,8 @@ foreach (sproc = c("BM", "OUfixedRoot")) %do% {
                       nulldisp = NA,
                       ddf_method = ddf_method)
   
-  method_info$methodMod <- paste0(method_info$method, "_",
-                                  method_info$methodProcess, "_",
-                                  paste0("eBayes_", method_info$eBayes), "_",
-                                  paste0("ddf_method_", method_info$ddf_method), "_",
-                                  method_info$trend, "_",
-                                  method_info$regCor)
+  method_info$methodMod <- paste0("phylolimma_",
+                                  method_info$methodProcess)
   
   ## Remove some combinations of parameters
   if(lnorm != "TPM" || ltrans != "log2") return(NULL)
