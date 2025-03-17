@@ -47,8 +47,10 @@
 *.kilepr
 *.fls
 # data files
-#*.doc
-#*.docx
+*.doc
+*.docx
+*.ppt
+*.pptx
 #*.odt
 #*.csv
 #*.xls
