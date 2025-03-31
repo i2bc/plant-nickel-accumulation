@@ -27,8 +27,7 @@ library(compcodeR)
 ################################################################################
 ## File management
 ################################################################################
-condName <- "Hyperaccu" # change here Hyperaccu or Tolerance
-# condName <- "Tolerance"
+condName <- "Hyperaccu" 
 
 ## File
 datestamp_day_real_nickel <- format(Sys.time(), "%Y-%m-%d")
@@ -122,8 +121,8 @@ colData <- colData[match(tree_rep$tip.label, rownames(colData)), ]
 ################################################################################
 # format compcodeR
 ################################################################################
-## rename key column "condition" in colData
-colnames(colData)[grep(condName, colnames(colData))] <- "condition"
+## rename key column "condition" in colData (done already)
+## colnames(colData)[grep(condName, colnames(colData))] <- "condition"
 info.parameters <- list(dataset = "nickel_cpd", uID = "1", tree = tree_rep)
 cpd <- phyloCompData(count.matrix = counts_noNA, 
                      sample.annotations = colData, 
@@ -135,5 +134,7 @@ check_phyloCompData(cpd)
 
 ## save data to rds file
 dataset <- "nickel_cpd"
-dataset_file <- here(file.path(results_directory, paste0(dataset, ".rds")))
+## save in data and not in "results_directory"
+#dataset_file <- here(file.path(results_directory, paste0(dataset, ".rds")))
+dataset_file <- here(file.path("data", paste0(dataset, ".rds")))
 saveRDS(cpd, file = dataset_file)
