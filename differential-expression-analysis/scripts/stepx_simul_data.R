@@ -85,11 +85,15 @@ relmeans_nickel <- rowMeans(counts_noNA[,colData$condition == "oui"])
 n.vars <- dim(counts_noNA)[1]
 
 plot(relmeans_nickel,dispersions_nickel)
+plot(log(relmeans_nickel), log(dispersions_nickel))
 
 plot(log(relmeans_nickel), log(dispersions_nickel),
      xlim=c(0,15),ylim=c(0,15))
 abline(0,1)
 
+hist(log(dispersions_nickel))
+
+anyNA(dispersions_nickel)
 
 ################################################################################
 ## Format Tree
@@ -100,6 +104,7 @@ N <- length(tree$tip.label) # total number of observations (with replicates)
 tree$edge.length <- tree$edge.length / max(diag(vcv(tree))[1:N]) # normalize tree to unit height
 
 id_species <- sub("_.*", "", tree$tip.label)
+id_species <- sub("Scor[A-D]", "Scor", id_species) # ScorA, ScorB and ScorC are the same
 id_species <- factor(id_species)
 names(id_species) <- tree$tip.label
 
@@ -134,14 +139,75 @@ rownames(data.trans) <- rownames(counts_noNA)
 lambdas <- apply(data.trans, 1, function(x) phylolm::phylolm(x ~ colData$condition, phy = tree, model = "lambda")$optpar)
 hist(lambdas)
 
+# fit empirical distribution
+estima_beta <- RobPer::betaCvMfit(lambdas[lambdas > 1e-7])
+x <- seq(0, 1, 0.01)
+hist(lambdas, breaks = 100, freq = FALSE)
+lines(x, dbeta(x, estima_beta[1], estima_beta[2]))
+set.seed(1289)
+lambdas_sim <- rbeta(length(lambdas), estima_beta[1], estima_beta[2])
+hist(lambdas_sim,  breaks = 100, freq = FALSE)
+
+# OU analysis to get empirical selection strength
+oufits <- apply(data.trans, 1, function(x) phylolm::phylolm(x ~ colData$condition, phy = tree,
+                                                            model = "OUfixedRoot", measurement_error = TRUE,
+                                                            lower.bound = list(sigma2_error = (.Machine$double.eps)^0.5)))
+
+get_lambda_error <- function(sigma2, sigma2_error, h_tree) {
+  return(sigma2 * h_tree / (sigma2_error + sigma2 * h_tree))
+}
+get_gamma <- function(phyfit) {
+  return(phyfit$sigma2 / 2 / phyfit$optpar)
+}
+tree_height <- function(tree) {
+  return(max(ape::node.depth.edgelength(tree)))
+}
+get_lambda_error_OU <- function(alpha, sigma2, sigma2_error) {
+  tree_model <- phylolm::transf.branch.lengths(tree, "OUfixedRoot",
+                                               parameters = list(alpha = alpha))$tree
+  tilde_t <- tree_height(tree_model) / (2 * alpha)
+  lambda_ou_error <- get_lambda_error(sigma2, sigma2_error, tilde_t)
+  return(lambda_ou_error)
+}
+get_lambda_error_OU_lm <- function(phyfit) {
+  get_lambda_error_OU(phyfit$optpar, phyfit$sigma2, phyfit$sigma2_error)
+}
+alphas <- sapply(oufits, function(x) x$optpar)
+sig2_err <- sapply(oufits, function(x) x$sigma2_error)
+gammas <- sapply(oufits, get_gamma)
+lambdas_OU <- sapply(oufits, get_lambda_error_OU_lm)
+hist(alphas, breaks = 100)
+hist(log(2) / alphas, breaks = 100)
+hist(gammas, breaks = 100)
+hist(lambdas_OU, breaks = 100)
+
+# fit empirical distribution lambda_OU
+estim_beta_OU <- RobPer::betaCvMfit(lambdas_OU[lambdas_OU > 1e-7])
+x <- seq(0, 1, 0.01)
+hist(lambdas_OU, breaks = 100, freq = FALSE)
+lines(x, dbeta(x, estim_beta_OU[1], estim_beta_OU[2]))
+set.seed(1289)
+lambdas_OU_sim <- rbeta(length(lambdas_OU), estim_beta_OU[1], estim_beta_OU[2])
+hist(lambdas_OU_sim, breaks = 100, freq = FALSE)
+
+# fit empirical distribution alpha
+fitgamma <- robust::gammaRob(alphas[alphas < 50])
+x <- seq(0, 50, 0.01)
+hist(alphas, breaks = 100, freq = FALSE)
+lines(x, dgamma(x, shape = fitgamma$estimate["shape"], scale = fitgamma$estimate["scale"]))
+set.seed(1289)
+alphas_OU_sim <- rgamma(length(alphas), shape = fitgamma$estimate["shape"], scale = fitgamma$estimate["scale"])
+hist(alphas_OU_sim, breaks = 100, freq = FALSE)
+
+
 ################################################################################
 ## Parameters for the simulation
 ################################################################################
 # samples.per.cond <- N / 2
 n.diffexp <- 250
 
-Nrep <- 10 # number of replicates
-all_effect_size <- c(3.0, 5.0)
+Nrep <- 5 # number of replicates
+all_effect_size <- c(1.0, 2.0, 3.0)
 
 selection.strength <- log(2) / 0.5 # half life is 50% of tree height
 all_selection_strength <- list("emp", "sim", selection.strength)
@@ -178,22 +244,6 @@ tiplabels(pch = 21, col = id_cond, bg = id_cond)
 all_cond_types <- c(all_cond_types, "condition")
 all_conds[["condition"]] <- id_cond
 
-# pas de tree small
-#plot(tree_small)
-#tiplabels(pch = 21, col = id_cond[id_small], bg = id_cond[id_small])
-
-# ## primates
-# id_cond <- colData$primates
-# levels(id_cond) <- c(1, 2)
-# names(id_cond) <- rownames(colData)
-# # reorder
-# id_cond <- id_cond[match(tree$tip.label, names(id_cond))]
-# 
-# plot(tree)
-# tiplabels(pch = 21, col = id_cond, bg = id_cond)
-# 
-# all_cond_types <- c(all_cond_types, "primates")
-# all_conds[["primates"]] <- id_cond
 
 ################################################################################
 ## Simulations 
@@ -276,7 +326,6 @@ for (cond_type in all_cond_types_tree[[tree_type]]) {
                                                    id.species = id_species,
                                                    model.process = model_process,
                                                    selection.strength = sl,
-                                                   check.id.species = FALSE,
                                                    lengths.relmeans = if (use_lengths == "with_lengths") mean_lengths else NULL,
                                                    lengths.dispersions = if (use_lengths == "with_lengths") disp_lengths else NULL
                 )
@@ -293,4 +342,32 @@ for (cond_type in all_cond_types_tree[[tree_type]]) {
     }
   }
 }
+
+save(Nrep,
+     all_effect_size,
+     all_use_lengths,
+     all_tree_types,
+     all_cond_types_tree,
+     all_model_process_tree,
+     all_conds,
+     all_prop_var_tree,
+     all_selection_strength,
+     all_fact_disp,
+     dispersions_nickel,
+     relmeans_nickel,
+     seqdepth_nickel,
+     minfact_nickel,
+     maxfact_nickel,
+     mean_lengths,
+     disp_lengths,
+     lambdas,
+     lambdas_OU,
+     lambdas_OU_sim,
+     lambdas_sim,
+     alphas,
+     alphas_OU_sim,
+     n.diffexp,
+     id_species,
+     tree,
+     file = file.path(simus_directory, "simulation_parameters.RData"))
 
